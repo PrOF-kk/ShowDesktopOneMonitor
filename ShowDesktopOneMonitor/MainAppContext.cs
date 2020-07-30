@@ -15,8 +15,10 @@ namespace ShowDesktopOneMonitor
         private NotifyIcon trayIcon = null;
         private List<DesktopWindowID>[] PrevStateByScreen = new List<DesktopWindowID>[0];
 
+        /*
         private bool[] keyComb = new bool[3]; // buffer for Win + Shift + D
         private GlobalKeyboardHook globalKeyboardHook;
+        */
 
         public MainAppContext ()
         {
@@ -33,11 +35,20 @@ namespace ShowDesktopOneMonitor
                 Text = "Show Desktop Enhanced",
             };
             PrevStateByScreen = new List<DesktopWindowID>[Screen.AllScreens.Length];
-
+            /*
             globalKeyboardHook = new GlobalKeyboardHook();
             globalKeyboardHook.KeyboardPressed += OnKeyPressed;
+            */
+            HotKeyManager.RegisterHotKey(Keys.D1, KeyModifiers.Alt);
+            HotKeyManager.HotKeyPressed += new EventHandler<HotKeyEventArgs>(HotKeyManager_HotKeyPressed);
         }
 
+        private void HotKeyManager_HotKeyPressed(object sender, HotKeyEventArgs e)
+        {
+            OnShowDesktopKeyComb();
+        }
+
+        /*
         private void OnKeyPressed (object sender, GlobalKeyboardHookEventArgs e)
         {
             var key = (Keys)e.KeyboardData.VirtualCode;
@@ -64,6 +75,7 @@ namespace ShowDesktopOneMonitor
                 e.Handled = true;
             }
         }
+        */
 
         private void OnShowDesktopKeyComb ()
         {
@@ -150,7 +162,7 @@ namespace ShowDesktopOneMonitor
 
         ~MainAppContext () //Destructor
         {
-            globalKeyboardHook?.Dispose();
+            //globalKeyboardHook?.Dispose();
         }
 
         private void Application_ThreadException (object sender, ThreadExceptionEventArgs e)

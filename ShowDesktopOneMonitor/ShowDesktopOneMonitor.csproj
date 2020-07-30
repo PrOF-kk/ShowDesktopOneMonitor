@@ -86,6 +86,7 @@
     <Compile Include="FrigoTab\WindowHandle.cs" />
     <Compile Include="FrigoTab\WindowMessages.cs" />
     <Compile Include="GlobalKeyboardHook.cs" />
+    <Compile Include="HotKeyManager.cs" />
     <Compile Include="MainAppContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
