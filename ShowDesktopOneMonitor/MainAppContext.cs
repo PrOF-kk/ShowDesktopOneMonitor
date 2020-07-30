@@ -167,11 +167,11 @@ namespace ShowDesktopOneMonitor
 
         private void Application_ThreadException (object sender, ThreadExceptionEventArgs e)
         {
-            MessageBox.Show("Необработанное исключение: " + e.Exception.ToString(), "Show Desktop Enhanced", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Unhandled exception: " + e.Exception.ToString(), "Show Desktop Enhanced", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void CurrentDomain_UnhandledException (object sender, UnhandledExceptionEventArgs e)
         {
-            MessageBox.Show($"Необработанное исключение: {e.ExceptionObject as Exception}", "Show Desktop Enhanced", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Unhandled exception: {e.ExceptionObject as Exception}", "Show Desktop Enhanced", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
     public class DesktopWindowID : IEquatable<DesktopWindowID>
