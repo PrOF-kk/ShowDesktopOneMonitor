@@ -15,11 +15,6 @@ namespace ShowDesktopOneMonitor
         private NotifyIcon trayIcon = null;
         private List<DesktopWindowID>[] PrevStateByScreen = new List<DesktopWindowID>[0];
 
-        /*
-        private bool[] keyComb = new bool[3]; // buffer for Win + Shift + D
-        private GlobalKeyboardHook globalKeyboardHook;
-        */
-
         public MainAppContext ()
         {
             Application.ThreadException += this.Application_ThreadException;
@@ -35,10 +30,7 @@ namespace ShowDesktopOneMonitor
                 Text = "Show Desktop Enhanced",
             };
             PrevStateByScreen = new List<DesktopWindowID>[Screen.AllScreens.Length];
-            /*
-            globalKeyboardHook = new GlobalKeyboardHook();
-            globalKeyboardHook.KeyboardPressed += OnKeyPressed;
-            */
+
             HotKeyManager.RegisterHotKey(Keys.D1, KeyModifiers.Alt);
             HotKeyManager.HotKeyPressed += new EventHandler<HotKeyEventArgs>(HotKeyManager_HotKeyPressed);
         }
@@ -47,35 +39,6 @@ namespace ShowDesktopOneMonitor
         {
             OnShowDesktopKeyComb();
         }
-
-        /*
-        private void OnKeyPressed (object sender, GlobalKeyboardHookEventArgs e)
-        {
-            var key = (Keys)e.KeyboardData.VirtualCode;
-
-            if (key == Keys.LWin) {
-                keyComb[0] = e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown;
-                if (keyComb[0]) {
-                    keyComb[1] = keyComb[2] = false;
-                }
-            }
-            else if (key == Keys.LShiftKey && keyComb[0] == true) {
-                keyComb[1] = e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown;
-                if (keyComb[1]) {
-                    keyComb[2] = false;
-                }
-            }
-            else if (key == Keys.D && keyComb[0] == true && keyComb[1] == true) {
-                keyComb[2] = e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown;
-            }
-            
-            bool trigger = keyComb.All(x => x == true);
-            if (trigger) {
-                OnShowDesktopKeyComb();
-                e.Handled = true;
-            }
-        }
-        */
 
         private void OnShowDesktopKeyComb ()
         {
@@ -158,11 +121,6 @@ namespace ShowDesktopOneMonitor
 
             // return true if style differs
             return false == newList.All(x => PrevStateByScreen[screenIdx].First(y => y == x).WindowStyle.Equals(x.WindowStyle));
-        }
-
-        ~MainAppContext () //Destructor
-        {
-            //globalKeyboardHook?.Dispose();
         }
 
         private void Application_ThreadException (object sender, ThreadExceptionEventArgs e)
