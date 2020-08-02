@@ -1,7 +1,7 @@
 # ShowDesktopOneMonitor
 
 ## Description
-Adds abillity to Show Desktop (Win + D) only for One Monitor!
+Adds ability to Show Desktop (Win + D) only for one monitor.
 Works exactly like Win + D does **plus additional features**:
 - Shows desktop (minimizes all windows)
 - Restores windows to their previous states
@@ -17,6 +17,7 @@ Works exactly like Win + D does **plus additional features**:
 - Trigger: *Run only when user is logged on*
 - On *Settings* tab make sure that task will not be stopped after running longer than some days, for example.  
 Note: program has icon in tray, but unfortunately it is invisible if the app is started from Task Scheduler :(
+Adding a slight delay before starting the app might fix the issue
 
 ## Usage
 Press key combination: *Alt + 1* to minimize/restore windows **on monitor where cursor is currently on**.
