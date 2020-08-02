@@ -37,32 +37,44 @@ namespace ShowDesktopOneMonitor
 
         private void HotKeyManager_HotKeyPressed(object sender, HotKeyEventArgs e)
         {
+            Console.WriteLine(e.Key.ToString() + " " + e.Modifiers.ToString());
             OnShowDesktopKeyComb();
         }
 
-        private void OnShowDesktopKeyComb ()
+        private void OnShowDesktopKeyComb()
         {
-            Console.WriteLine("Toogling hide windows on screen...");
+            Console.WriteLine("Getting screen from cursor position...");
 
-            // 1. Get current screen
             Screen currentScreen = Screen.FromPoint(Cursor.Position);
             int screenIdx = Array.IndexOf(Screen.AllScreens, currentScreen);
 
+            OnShowDesktopDirect(screenIdx);
+        }
+        private void OnShowDesktopDirect(int screenIdx)
+        {
+            Console.WriteLine("Toggling hide windows on screen " + screenIdx);
+
+            // 1. Get chosen screen
+            Screen chosenScreen = Screen.AllScreens[screenIdx];
+
             // 2. Get windows on selected screen
-            List<WindowHandle> windows = GetWindowsOnScreen(currentScreen);
+            List<WindowHandle> windows = GetWindowsOnScreen(chosenScreen);
 
             // 3. Has the list changed from the previous list ?
             List<DesktopWindowID> newWindowIDs = ConvertWindowsToIDs(windows);
 
             // restore if all windows are minimized AND prev state differs only by windows style
-            if (newWindowIDs.All(x => x.WindowStyle != WindowStyles.Visible) && PrevStateByScreen[screenIdx] != null 
-                                        && DoesPrevStateDiffersOnlyByWindowsStyle(newWindowIDs, screenIdx)) {
+            if (newWindowIDs.All(x => x.WindowStyle != WindowStyles.Visible) && PrevStateByScreen[screenIdx] != null
+                                        && DoesPrevStateDiffersOnlyByWindowsStyle(newWindowIDs, screenIdx))
+            {
                 restoreAllWindows(screenIdx);
             }
-            else {
+            else
+            {
                 minimizeAllWindows(newWindowIDs, screenIdx);
-            }           
+            }
         }
+
         private void minimizeAllWindows (List<DesktopWindowID> windowList, int screenIdx)
         {
             //int count = 0;
