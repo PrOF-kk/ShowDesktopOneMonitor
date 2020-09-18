@@ -20,7 +20,7 @@ Note: program has icon in tray, but unfortunately it is invisible if the app is 
 Adding a slight delay before starting the app might fix the issue
 
 ## Usage
-Press key combination: *Alt + 1* to minimize/restore windows **on monitor where cursor is currently on**.
+Press key combination: *Alt + ~ (the key to the left of the "1" key for any keyboard layout)* to minimize/restore windows **on the monitor where cursor is currently on**.
 This combination might be changed in future releases, and will eventually hopefully be user-configurable
 
 ## Credits

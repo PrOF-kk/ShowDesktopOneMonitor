@@ -31,7 +31,7 @@ namespace ShowDesktopOneMonitor
             };
             PrevStateByScreen = new List<DesktopWindowID>[Screen.AllScreens.Length];
 
-            HotKeyManager.RegisterHotKey(Keys.D1, KeyModifiers.Alt);
+            HotKeyManager.RegisterHotKey(Keys.Oem5, KeyModifiers.Alt);
             HotKeyManager.HotKeyPressed += new EventHandler<HotKeyEventArgs>(HotKeyManager_HotKeyPressed);
         }
 
